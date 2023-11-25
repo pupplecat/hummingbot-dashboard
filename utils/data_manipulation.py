@@ -76,16 +76,16 @@ class StrategyData:
         return strategy_summary
 
     def get_single_market_strategy_data(self, exchange: str, trading_pair: str):
-        orders = self.orders[(self.orders["market"] == exchange) & (self.orders["symbol"] == trading_pair)].copy()
+        orders = self.orders[(self.orders["market"].apply(lambda x: x.lower().replace("_papertrade", "")) == exchange) & (self.orders["symbol"] == trading_pair)].copy()
         trade_fill = self.trade_fill[self.trade_fill["order_id"].isin(orders["id"])].copy()
         order_status = self.order_status[self.order_status["order_id"].isin(orders["id"])].copy()
         if self.market_data is not None:
-            market_data = self.market_data[(self.market_data["exchange"] == exchange) &
+            market_data = self.market_data[(self.market_data["exchange"].apply(lambda x: x.lower().replace("_papertrade", "")) == exchange) &
                                            (self.market_data["trading_pair"] == trading_pair)].copy()
         else:
             market_data = None
         if self.position_executor is not None:
-            position_executor = self.position_executor[(self.position_executor["exchange"] == exchange) &
+            position_executor = self.position_executor[(self.position_executor["exchange"].apply(lambda x: x.lower().replace("_papertrade", "")) == exchange) &
                                                        (self.position_executor["trading_pair"] == trading_pair)].copy()
         else:
             position_executor = None
