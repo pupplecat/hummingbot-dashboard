@@ -7,6 +7,7 @@ from streamlit_elements import mui
 
 import constants
 from .dashboard import Dashboard
+from CONFIG import HUMMINGBOT_IMAGE_NAME
 
 
 class LaunchMasterBotCard(Dashboard.Item):
@@ -24,7 +25,8 @@ class LaunchMasterBotCard(Dashboard.Item):
             time.sleep(2)
             DockerManager().create_hummingbot_instance(instance_name="hummingbot-master_bot_conf",
                                                        base_conf_folder="hummingbot_files/templates/master_bot_conf/.",
-                                                       target_conf_folder="hummingbot_files/templates/master_bot_conf/."
+                                                       target_conf_folder="hummingbot_files/templates/master_bot_conf/.",
+                                                       image=HUMMINGBOT_IMAGE_NAME
                                                        )
             with st.spinner('Starting Master Configs instance... This process may take a few seconds.'):
                 time.sleep(3)
