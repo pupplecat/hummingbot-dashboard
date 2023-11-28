@@ -15,3 +15,4 @@ CERTIFIED_STRATEGIES = ["xemm", "cross exchange market making", "pmm", "pure mar
 
 # Set AUTH_SYSTEM_ENABLED based on the environment variable
 AUTH_SYSTEM_ENABLED = os.getenv('AUTH_SYSTEM_ENABLED', 'False') == 'True'
+HUMMINGBOT_IMAGE_NAME = os.getenv('HUMMINGBOT_IMAGE_NAME', 'hummingbot/hummingbot:latest')

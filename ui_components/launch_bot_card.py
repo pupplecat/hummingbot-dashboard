@@ -8,6 +8,7 @@ from streamlit_elements import mui, lazy
 import constants
 from utils.os_utils import get_directories_from_directory
 from .dashboard import Dashboard
+from CONFIG import HUMMINGBOT_IMAGE_NAME
 
 
 class LaunchBotCard(Dashboard.Item):
@@ -15,7 +16,7 @@ class LaunchBotCard(Dashboard.Item):
         super().__init__(*args, **kwargs)
         self.is_master_bot_running = False
         self._bot_name = None
-        self._image_name = "hummingbot/hummingbot:latest"
+        self._image_name = HUMMINGBOT_IMAGE_NAME
         self._base_bot_config = "master_bot_conf"
 
     def _set_bot_name(self, event):
@@ -80,8 +81,8 @@ class LaunchBotCard(Dashboard.Item):
                     mui.TextField(label="Instance Name", variant="outlined", onChange=lazy(self._set_bot_name),
                                     sx={"width": "100%"})
                 with mui.Grid(item=True, xs=4):
-                    mui.TextField(label="Hummingbot Image", 
-                                  defaultValue="hummingbot/hummingbot:latest",
+                    mui.TextField(label="Hummingbot Image",
+                                  defaultValue=HUMMINGBOT_IMAGE_NAME,
                                   variant="outlined",
                                   placeholder="hummingbot-[name]",
                                   onChange=lazy(self._set_image_name),

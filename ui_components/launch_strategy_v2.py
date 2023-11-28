@@ -13,6 +13,8 @@ from utils.os_utils import get_directories_from_directory, get_python_files_from
     get_yml_files_from_directory
 from .dashboard import Dashboard
 
+from CONFIG import HUMMINGBOT_IMAGE_NAME
+
 
 class LaunchStrategyV2(Dashboard.Item):
     DEFAULT_ROWS = []
@@ -29,7 +31,7 @@ class LaunchStrategyV2(Dashboard.Item):
         self._controller_configs_available = get_yml_files_from_directory("hummingbot_files/controller_configs")
         self._controller_config_selected = None
         self._bot_name = None
-        self._image_name = "hummingbot/hummingbot:latest"
+        self._image_name = HUMMINGBOT_IMAGE_NAME
         self._base_bot_config = "master_bot_conf"
 
     def _set_bot_name(self, event):
@@ -93,7 +95,7 @@ class LaunchStrategyV2(Dashboard.Item):
                                   sx={"width": "100%"})
                 with mui.Grid(item=True, xs=4):
                     mui.TextField(label="Hummingbot Image",
-                                  defaultValue="hummingbot/hummingbot:latest",
+                                  defaultValue=HUMMINGBOT_IMAGE_NAME,
                                   variant="outlined",
                                   placeholder="hummingbot-[name]",
                                   onChange=lazy(self._set_image_name),
